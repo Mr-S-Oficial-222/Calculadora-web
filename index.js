@@ -20,7 +20,7 @@ function preso(simbolo) {
     actualizarPantalla(ecuacion);
 }
 
-function mostrarResultado() {
+function mos() {
     try {
         let textoLimpio = ecuacion;
         
