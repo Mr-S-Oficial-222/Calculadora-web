@@ -1,42 +1,34 @@
-let ecuacion = "";
+let pantalla = document.getElementById("pan");
+let operacion = "";
 
-function actualizarPantalla(texto) {
-    document.getElementById("pan").innerText = texto;
-}
-
-function pres(numero) {
-    if (ecuacion === "") {
-        ecuacion = numero;
+function pres(num) {
+    if (num === '.' && operacion.endsWith('.')) return;
+    if (operacion === "0" && num !== '.') {
+        operacion = num;
     } else {
-        ecuacion = ecuacion + numero; 
+        operacion += num;
     }
-    actualizarPantalla(ecuacion);
+    pantalla.innerText = operacion;
 }
 
-function preso(simbolo) {
-    ecuacion = ecuacion + " " + simbolo + " ";
-    actualizarPantalla(ecuacion);
+function preso(op) {
+    if (["+", "-", "*", "/", "**"].some(el => operacion.endsWith(el))) return;
+    operacion += op;
+    pantalla.innerText = operacion;
 }
 
 function mos() {
     try {
-        let textoLimpio = ecuacion;
-        
-        textoLimpio = textoLimpio.replaceAll('×', '*');
-        textoLimpio = textoLimpio.replaceAll('÷', '/');
-        
-        let resultado = eval(textoLimpio);
-        
-        actualizarPantalla(resultado);
-        ecuacion = String(resultado); 
-    } catch (error) {
-        actualizarPantalla("Error");
-        ecuacion = "";
+        let resultado = eval(operacion);
+        pantalla.innerText = resultado;
+        operacion = resultado.toString();
+    } catch (e) {
+        pantalla.innerText = "Error";
+        operacion = "";
     }
 }
 
-
 function limpiarPantalla() {
-    ecuacion = "";
-    actualizarPantalla("0"); 
+    operacion = "";
+    pantalla.innerText = "0";
 }
