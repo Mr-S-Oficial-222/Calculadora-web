@@ -1,4 +1,3 @@
-let pantalla = document.getElementById("pan");
 let operacion = "";
 
 function pres(num) {
@@ -8,27 +7,27 @@ function pres(num) {
     } else {
         operacion += num;
     }
-    pantalla.innerText = operacion;
+    document.getElementById("pan").innerText = operacion;
 }
 
 function preso(op) {
     if (["+", "-", "*", "/", "**"].some(el => operacion.endsWith(el))) return;
     operacion += op;
-    pantalla.innerText = operacion;
+    document.getElementById("pan").innerText = operacion;
 }
 
 function mos() {
     try {
         let resultado = eval(operacion);
-        pantalla.innerText = resultado;
+        document.getElementById("pan").innerText = resultado;
         operacion = resultado.toString();
     } catch (e) {
-        pantalla.innerText = "Error";
+        document.getElementById("pan").innerText = "Error";
         operacion = "";
     }
 }
 
 function limpiarPantalla() {
     operacion = "";
-    pantalla.innerText = "0";
+    document.getElementById("pan").innerText = "0";
 }
