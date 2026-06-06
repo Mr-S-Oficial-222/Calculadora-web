@@ -20,13 +20,16 @@ body{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-    padding: 20px;
+  padding: 20px;
   font-size: 20px;
   font-weight: bold;
   background-color: #c6c8d7;
   border: 1px solid #ccc;
   border-radius: 8px; 
+  height: auto; 
+  box-sizing: border-box;
 }
+
 h1{
   color:#0b2965;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
