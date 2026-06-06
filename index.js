@@ -15,7 +15,6 @@ function pres(numero) {
 }
 
 function preso(simbolo) {
-    if (["+", "-", "×", "÷", "^"].some(el => ecuacion.trim().endsWith(el))) return;
     ecuacion = ecuacion + " " + simbolo + " ";
     actualizarPantalla(ecuacion);
 }
@@ -26,7 +25,6 @@ function mos() {
         
         textoLimpio = textoLimpio.replaceAll('×', '*');
         textoLimpio = textoLimpio.replaceAll('÷', '/');
-        textoLimpio = textoLimpio.replaceAll('^', '**');
         
         let resultado = eval(textoLimpio);
         
