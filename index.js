@@ -40,3 +40,18 @@ function limpiarPantalla() {
     ecuacion = "";           
     actualizarPantalla("0"); 
 }
+
+function borrarUltimo() {
+    if (ecuacion.endsWith(" ")) {
+        ecuacion = ecuacion.slice(0, -3);
+    } else {
+        ecuacion = ecuacion.slice(0, -1);
+    }
+    
+    if (ecuacion === "") {
+        actualizarPantalla("0");
+    } else {
+        actualizarPantalla(ecuacion);
+    }
+}
+
