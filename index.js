@@ -1,33 +1,48 @@
-let operacion = "";
+// 🌍 Variable global: aquí guardamos la operación en texto
+let ecuacion = "";
 
-function pres(num) {
-    if (num === '.' && operacion.endsWith('.')) return;
-    if (operacion === "0" && num !== '.') {
-        operacion = num;
+// Función para actualizar el texto de tu visor gris
+function actualizarPantalla(texto) {
+    document.getElementById("pan").innerText = texto;
+}
+
+// 1. Para tus botones de números (que llaman a "pres")
+function pres(numero) {
+    if (ecuacion === "") {
+        ecuacion = numero;
     } else {
-        operacion += num;
+        ecuacion = ecuacion + numero; 
     }
-    document.getElementById("pan").innerText = operacion;
+    actualizarPantalla(ecuacion);
 }
 
-function preso(op) {
-    if (["+", "-", "*", "/", "**"].some(el => operacion.endsWith(el))) return;
-    operacion += op;
-    document.getElementById("pan").innerText = operacion;
+// 2. Para tus botones de operación (que llaman a "preso")
+function preso(simbolo) {
+    ecuacion = ecuacion + " " + simbolo + " ";
+    actualizarPantalla(ecuacion);
 }
 
-function mos() {
+// 3. La función maestra para el botón "="
+function mostrarResultado() {
     try {
-        let resultado = eval(operacion);
-        document.getElementById("pan").innerText = resultado;
-        operacion = resultado.toString();
-    } catch (e) {
-        document.getElementById("pan").innerText = "Error";
-        operacion = "";
+        let textoLimpio = ecuacion;
+        
+        // Limpiamos los símbolos bonitos para que JS los entienda
+        textoLimpio = textoLimpio.replaceAll('×', '*');
+        textoLimpio = textoLimpio.replaceAll('÷', '/');
+        
+        let resultado = eval(textoLimpio);
+        
+        actualizarPantalla(resultado);
+        ecuacion = String(resultado); 
+    } catch (error) {
+        actualizarPantalla("Error");
+        ecuacion = "";
     }
 }
 
+// 4. NUEVA: Función para borrar todo cuando tocas la "C"
 function limpiarPantalla() {
-    operacion = "";
-    document.getElementById("pan").innerText = "0";
+    ecuacion = "";           // Vaciamos la memoria interna
+    actualizarPantalla("0"); // Volvemos a poner el visor en 0
 }
